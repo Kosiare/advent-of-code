@@ -6,7 +6,7 @@ func findTheSmallest(data [2][]int, side int) (smallest int, smallestIndex int) 
 	smallest = data[side][0]
 	for i := range data[side] {
 		if data[side][i] < smallest {
-			smallest = data[side][i]
+			smallest = data[i][side]
 			smallestIndex = i
 		}
 	}
