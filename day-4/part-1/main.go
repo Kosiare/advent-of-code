@@ -30,13 +30,16 @@ func lookUpVertical(input []string) int {
 	colLen := len(input)
 	for col := range input {
 		for char := range input[col] {
-			// normal
-			if (col+3 < colLen) && (string(input[col][char]) == "X") && (string(input[col+1][char]) == "M") && (string(input[col+2][char]) == "A") && (string(input[col+3][char]) == "S") {
-				ans++
-			}
-			// backwards
-			if (col+3 < colLen) && (string(input[col][char]) == "S") && (string(input[col+1][char]) == "A") && (string(input[col+2][char]) == "M") && (string(input[col+3][char]) == "X") {
-				ans++
+			// check if there is enough space for vertical check
+			if col+3 < colLen {
+				// normal
+				if (string(input[col][char]) == "X") && (string(input[col+1][char]) == "M") && (string(input[col+2][char]) == "A") && (string(input[col+3][char]) == "S") {
+					ans++
+				}
+				// backwards
+				if (string(input[col][char]) == "S") && (string(input[col+1][char]) == "A") && (string(input[col+2][char]) == "M") && (string(input[col+3][char]) == "X") {
+					ans++
+				}
 			}
 		}
 	}
@@ -50,21 +53,27 @@ func lookUpDiagonal(input []string) int {
 
 	for col := range input {
 		for char := range input[col] {
-			// normal - left to right
-			if (col+3 < colLen && char+3 < rowLen) && (string(input[col][char]) == "X") && (string(input[col+1][char+1]) == "M") && (string(input[col+2][char+2]) == "A") && (string(input[col+3][char+3]) == "S") {
-				ans++
+			// check if there is enough space for left to right check
+			if col+3 < colLen && char+3 < rowLen {
+				// normal
+				if (string(input[col][char]) == "X") && (string(input[col+1][char+1]) == "M") && (string(input[col+2][char+2]) == "A") && (string(input[col+3][char+3]) == "S") {
+					ans++
+				}
+				// backwards
+				if (string(input[col][char]) == "S") && (string(input[col+1][char+1]) == "A") && (string(input[col+2][char+2]) == "M") && (string(input[col+3][char+3]) == "X") {
+					ans++
+				}
 			}
-			// backwards - left to right
-			if (col+3 < colLen && char+3 < rowLen) && (string(input[col][char]) == "S") && (string(input[col+1][char+1]) == "A") && (string(input[col+2][char+2]) == "M") && (string(input[col+3][char+3]) == "X") {
-				ans++
-			}
-			// normal - right to left
-			if (col-3 >= 0 && char+3 < rowLen) && (string(input[col][char]) == "X") && (string(input[col-1][char+1]) == "M") && (string(input[col-2][char+2]) == "A") && (string(input[col-3][char+3]) == "S") {
-				ans++
-			}
-			// backwards - right to left
-			if (col-3 >= 0 && char+3 < rowLen) && (string(input[col][char]) == "S") && (string(input[col-1][char+1]) == "A") && (string(input[col-2][char+2]) == "M") && (string(input[col-3][char+3]) == "X") {
-				ans++
+			// check if there is enough space for right to left check
+			if col-3 >= 0 && char+3 < rowLen {
+				// normal
+				if (string(input[col][char]) == "X") && (string(input[col-1][char+1]) == "M") && (string(input[col-2][char+2]) == "A") && (string(input[col-3][char+3]) == "S") {
+					ans++
+				}
+				// backwards
+				if (string(input[col][char]) == "S") && (string(input[col-1][char+1]) == "A") && (string(input[col-2][char+2]) == "M") && (string(input[col-3][char+3]) == "X") {
+					ans++
+				}
 			}
 		}
 	}
